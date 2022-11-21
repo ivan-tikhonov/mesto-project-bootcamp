@@ -1,0 +1,11 @@
+.profile__container-leftside {
+  display: flex;
+}
+
+
+@media all and (max-width: 1279px) {
+  .profile__container-leftside {
+      flex-direction: column;
+      align-items: center;
+  }
+}

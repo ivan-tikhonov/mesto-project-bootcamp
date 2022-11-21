@@ -1,0 +1,11 @@
+.profile__container-title {
+  display: flex;
+  align-items: baseline;
+}
+
+@media all and (max-width: 1279px) {
+  .profile__container-title {
+     margin: 25px auto 0;
+     align-items: center;
+  }
+}

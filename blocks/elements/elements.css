@@ -1,0 +1,11 @@
+.elements {
+  margin: 51px auto 0;
+}
+
+@media all and (max-width: 1279px) {
+  .elements {
+     margin: 36px auto 0;
+  }
+}
+
+
