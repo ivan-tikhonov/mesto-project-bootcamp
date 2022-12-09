@@ -1,3 +1,7 @@
 .element__image.css {
   display: block;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  object-position: center;
 }

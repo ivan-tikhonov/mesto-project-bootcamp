@@ -3,7 +3,7 @@
   width: 21px;
   border: 0;
   background: url('../../../images/like.svg') no-repeat center;
-  background-size: 102%;
+  background-size: 100%;
   align-self: center;
   transition: opacity 0.3s linear;
 }
