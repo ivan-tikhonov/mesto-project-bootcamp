@@ -35,10 +35,13 @@ const profileOccupationElement = document.querySelector('.profile__subtitle');
 const popupProfile = document.querySelector(".popup_aim_profile");
 const popupProfileCloseButton = document.querySelector(".popup__button-close_aim_profile");
 
-const elementEditButton = document.querySelector('.profile__button-add')
+const elementEditButton = document.querySelector('.profile__button-add');
 
 const popupElement = document.querySelector('.popup_aim_element');
 const popupElementCloseButton = document.querySelector('.popup__button-close_aim_element')
+
+const popupImage = document.querySelector('.popup_aim_image');
+const popupImageCloseButton = document.querySelector('.popup__button-close_aim_image');
 
 const formProfile = document.querySelector('form[name="profile"]');
 const profileNameInput = formProfile.querySelector('input[name="profile_name"]');
@@ -66,7 +69,12 @@ function generateElement(item) {
   newElementDeleteButton.addEventListener('click', e => {
     e.target.closest('.element').remove();
   })
-
+  newElementImage.addEventListener('click', e => {
+    popupImage.classList.toggle('popup_opened');
+    popupImage.querySelector('.popup__image').src = item.link;
+    popupImage.querySelector('.popup__image').alt = item.name;
+    popupImage.querySelector('.popup__subtitle').textContent = item.name;
+  })
   return newElement;
 
 }
@@ -120,6 +128,7 @@ elementEditButton.addEventListener('click', function(e) {
 
 popupProfileCloseButton.addEventListener('click', closePopup)
 popupElementCloseButton.addEventListener('click', closePopup)
+popupImageCloseButton.addEventListener('click', closePopup);
 
 formProfile.addEventListener('submit', handleProfileFormSubmit);
 formElement.addEventListener('submit', handleElementFormSubmit);
