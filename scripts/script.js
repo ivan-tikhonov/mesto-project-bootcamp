@@ -146,6 +146,13 @@ profileEditButton.addEventListener('click', function(e) {
 
 elementEditButton.addEventListener('click', function(e) {
   openPopup(cardPopup);
+  enableValidation({
+    formSelector: cardForm,
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-save',
+    inputErrorClass: 'popup__input_state_invalid',
+    errorClass: 'popup__input-error_active'
+  });
 })
 
 
@@ -186,8 +193,6 @@ function isValid(configObject, formElement, inputElement) {
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
-    console.log(inputElement);
-    console.log(inputElement.validity);
     return !inputElement.validity.valid;
   });
 };

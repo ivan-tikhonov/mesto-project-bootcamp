@@ -59,9 +59,11 @@
       <div class="popup__container">
         <button type="button" class="popup__button-close popup__button-close_aim_element" aria-label="close form"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form name="element" action="#" class="popup__form">
-          <input type="text" name="element_name" class="popup__input" placeholder="Название">
-          <input type="text" name="element_url" class="popup__input" placeholder="Ссылка на картинку">
+        <form name="element" action="#" class="popup__form" novalidate>
+          <input id="element-name" type="text" minlength="2" maxlength="30" required name="element_name" class="popup__input" pattern="^[A-Za-zА-Яа-яЁё- ]+$" placeholder="Название">
+          <span class="element-name-error popup__input-error">error_text_placeholder</span>
+          <input id="element-url" type="url" required name="element_url" class="popup__input" placeholder="Ссылка на картинку">
+          <span class="element-url-error popup__input-error">error_text_placeholder</span>
           <button type="submit" class="popup__button-save" aria-label="save form">Сохранить</button>
         </form>
       </div>
