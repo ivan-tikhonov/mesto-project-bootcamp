@@ -12,13 +12,13 @@
 <body class="page">
 
     <header class="header">
-     <img class="logo" src="./images/logo.svg" alt="Логотип Место">
+     <img class="logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место">
     </header>
 
     <main class="content">
       <section class="profile">
         <div class="profile__container-leftside">
-          <img class="profile__image" src="./images/avatar.png" alt="аватар пользователя">
+          <img class="profile__image" src="<%=require('./images/avatar.png')%>" alt="аватар пользователя">
           <div class="profile__container-text">
             <div class="profile__container-title">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -87,7 +87,5 @@
     </div>
   </li>
 </template>
-
-<script src="./components/index.js" type="module"></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
-import { enableValidation } from "./validate.js"
-import { addElements} from "./card.js";
-import { openPopup, hideClosestPopup, preparePopup} from './utils.js'
-import { handleProfileFormSubmit, handleElementFormSubmit} from "./modal.js";
+import './pages/page.css';
+import { enableValidation } from "./components/validate.js";
+import { addElements} from "./components/card.js";
+import { openPopup, hideClosestPopup, preparePopup} from './components/utils.js';
+import { handleProfileFormSubmit, handleElementFormSubmit} from "./components/modal.js";
 
 const initialCards = [
   {
