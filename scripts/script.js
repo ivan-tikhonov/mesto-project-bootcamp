@@ -72,6 +72,20 @@ function hideClosestPopup(event) {
   }
 }
 
+function preparePopup(popup) {
+  openPopup(popup);
+  popup.addEventListener('click', evt => {
+    if (Array.from(evt.target.classList).includes('popup')) {
+      hideClosestPopup(evt);
+    };
+  });
+  popup.addEventListener('keydown', evt => {
+    if (evt.key == 'Escape') {
+      hideClosestPopup(evt);
+    }
+  });
+}
+
 
 
 function generateElement(item) {
@@ -130,7 +144,7 @@ function handleElementFormSubmit(evt) {
 addElements(initialCards);
 
 profileEditButton.addEventListener('click', function(e) {
-  openPopup(popupProfile);
+  preparePopup(popupProfile);
   const profileNameValue = profileNameElement.textContent;
   const profileOccupationValue = profileOccupationElement.textContent;
   popupProfileName.value = profileNameValue;
@@ -145,7 +159,7 @@ profileEditButton.addEventListener('click', function(e) {
 });
 
 elementEditButton.addEventListener('click', function(e) {
-  openPopup(cardPopup);
+  preparePopup(cardPopup);
   enableValidation({
     formSelector: cardForm,
     inputSelector: '.popup__input',
