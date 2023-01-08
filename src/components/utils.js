@@ -23,8 +23,4 @@ function closeByEscape(evt) {
   }
 }
 
-export function updateProfile(result, pic, name, desc) {
-  pic.src = result.avatar;
-  name.textContent = result.name;
-  desc.textContent = result.about;
-}
+

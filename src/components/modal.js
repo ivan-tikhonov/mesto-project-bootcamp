@@ -1,6 +1,6 @@
 import { hideClosestPopup } from './utils.js'
 import { addElements } from './card.js';
-import { patchUserInfo } from './api.js';
+import { newCard, patchUserInfo } from './api.js';
 
 const profileAvatarElement = document.querySelector('.profile__image')
 export const profileNameElement = document.querySelector('.profile__title');
@@ -19,7 +19,7 @@ export function handleProfileFormSubmit(evt, profileNameInput, profileOccupation
 
   patchUserInfo(nameValue, occupationValue)
    .then(res =>{
-      updateProfile.res;
+      updateProfile(res);
    })
    .catch(err => {
     console.log(err);
@@ -29,12 +29,13 @@ export function handleProfileFormSubmit(evt, profileNameInput, profileOccupation
 
 export function handleElementFormSubmit(evt, elementNameInput, elementURLInput) {
   evt.preventDefault();
-  const newElements = [];
-  const newElement = {};
-  newElement['name'] = elementNameInput.value;
-  newElement['link'] = elementURLInput.value;
-  newElements.push(newElement);
-  addElements(newElements);
+  newCard(elementNameInput.value, elementURLInput.value)
+    .then(res => {
+      addElements([res]);
+    })
+    .catch(err =>{
+      console.log(err);
+    });
   hideClosestPopup(evt);
 }
 

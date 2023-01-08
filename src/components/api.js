@@ -51,3 +51,21 @@ export function patchUserInfo(userName, userDesc) {
       }
     });
 }
+
+export function newCard(name, link) {
+  return fetch(`${config.baseUrl}/cards `, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
