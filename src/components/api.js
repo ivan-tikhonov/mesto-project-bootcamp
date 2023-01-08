@@ -33,3 +33,21 @@ export function getUserInfo() {
       }
     });
 }
+
+export function patchUserInfo(userName, userDesc) {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: userName,
+      about: userDesc
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}

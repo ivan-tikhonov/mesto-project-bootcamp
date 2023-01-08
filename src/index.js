@@ -1,8 +1,8 @@
 import './pages/page.css';
 import { enableValidation } from "./components/validate.js";
 import { addElements} from "./components/card.js";
-import { openPopup, closePopup, updateProfile} from './components/utils.js';
-import { handleProfileFormSubmit, handleElementFormSubmit} from "./components/modal.js";
+import { openPopup, closePopup} from './components/utils.js';
+import { handleProfileFormSubmit, handleElementFormSubmit, updateProfile, profileNameElement, profileOccupationElement} from "./components/modal.js";
 import { getInitialCards, getUserInfo } from './components/api.js';
 
 const configObject = {
@@ -19,9 +19,6 @@ const profileOccupationInput = formProfile.querySelector('input[name="profile_oc
 
 
 const profileEditButton = document.querySelector('.profile__button-edit');
-const profileAvatarElement = document.querySelector('.profile__image')
-const profileNameElement = document.querySelector('.profile__title');
-const profileOccupationElement = document.querySelector('.profile__subtitle');
 
 const popupProfile = document.querySelector(".popup_aim_profile");
 const popupProfileName = popupProfile.querySelector('input[name="profile_name"]');
@@ -86,12 +83,7 @@ getInitialCards()
 
   getUserInfo()
   .then((result) => {
-    updateProfile(
-        result,
-        profileAvatarElement,
-        profileNameElement,
-        profileOccupationElement
-      );
+    updateProfile(result);
   })
   .catch((err) => {
     console.log(err);
