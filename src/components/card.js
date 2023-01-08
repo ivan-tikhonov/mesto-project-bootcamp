@@ -13,6 +13,11 @@ function generateElement(item) {
   const newElementImage = newElement.querySelector('.element__image');
   const newElementTitle = newElement.querySelector('.element__title');
   const newElementLikeButton = newElement.querySelector('.element__button-like')
+  const newElementLikeCount = newElement.querySelector('.element__like-count')
+  const likecount = item.likes.reduce(function(total){
+    return total += 1;
+  },0);
+  newElementLikeCount.textContent = likecount;
   newElementImage.src = item.link;
   newElementImage.alt = item.name;
   newElementTitle.textContent = item.name;
