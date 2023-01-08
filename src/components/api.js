@@ -1,3 +1,4 @@
+
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/wbf-cohort-3',
   headers: {
@@ -34,6 +35,7 @@ export function getUserInfo() {
     });
 }
 
+
 export function patchUserInfo(userName, userDesc) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
@@ -65,6 +67,18 @@ export function newCard(name, link) {
       if (res.ok) {
         return res.json();
       } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
+
+export function deleteCard(id) {
+  return fetch(`${config.baseUrl}/cards/${id} `, {
+    headers: config.headers,
+    method: 'DELETE'
+  })
+    .then(res => {
+      if (!res.ok) {
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     });

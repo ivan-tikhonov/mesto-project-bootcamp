@@ -34,6 +34,8 @@ const elementEditButton = document.querySelector('.profile__button-add');
 const cardPopup = document.querySelector('.popup_aim_element');
 const popups = document.querySelectorAll('.popup')
 
+let userId
+
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
@@ -73,17 +75,17 @@ cardForm.addEventListener('submit', evt => {
 enableValidation(configObject);
 
 
-getInitialCards()
+getUserInfo()
   .then((result) => {
-    addElements(result);
+    updateProfile(result);
   })
   .catch((err) => {
     console.log(err);
   });
 
-  getUserInfo()
+getInitialCards()
   .then((result) => {
-    updateProfile(result);
+    addElements(result);
   })
   .catch((err) => {
     console.log(err);
