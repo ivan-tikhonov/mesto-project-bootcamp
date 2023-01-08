@@ -13,16 +13,13 @@ function generateElement(item) {
   const newElementImage = newElement.querySelector('.element__image');
   const newElementTitle = newElement.querySelector('.element__title');
   const newElementLikeButton = newElement.querySelector('.element__button-like')
-  const newElementDeleteButton = newElement.querySelector('.element__button-delete')
   newElementImage.src = item.link;
   newElementImage.alt = item.name;
   newElementTitle.textContent = item.name;
   newElementLikeButton.addEventListener('click', e => {
     e.target.classList.toggle('element__button-like_active');
   })
-  newElementDeleteButton.addEventListener('click', e => {
-    e.target.closest('.element').remove();
-  })
+
   newElementImage.addEventListener('click', e => {
     openPopup(popupImage);
     popupImagePic.src = item.link;
