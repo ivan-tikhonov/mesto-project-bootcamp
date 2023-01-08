@@ -7,7 +7,6 @@
     <meta name="description" content="Задание третьего спринта">
     <meta name="keywords" content="html, css, javascript">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/page.css" type="text/css">
 </head>
 <body class="page">
 
@@ -46,7 +45,7 @@
         <button type="button" class="popup__button-close popup__button-close_aim_profile" aria-label="close form"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="profile" action="#" class="popup__form" novalidate>
-          <input id="profile-name" type="text" minlength="2" maxlength="40" required name="profile_name" class="popup__input" pattern="^[A-Za-zА-Яа-яЁё- ]+$" placeholder="Жак-Ив Кусто">
+          <input id="profile-name" type="text" minlength="2" maxlength="40" required name="profile_name" class="popup__input" placeholder="Жак-Ив Кусто">
           <span class="profile-name-error popup__input-error">error_text_placeholder</span>
           <input id="profile-occupation" type="text" minlength="2" maxlength="200" required name="profile_occupation" class="popup__input" pattern="^[A-Za-zА-Яа-яЁё- ]+$" placeholder="Исследователь океана">
           <span class="profile-occupation-error popup__input-error">error_text_placeholder</span>
@@ -60,7 +59,7 @@
         <button type="button" class="popup__button-close popup__button-close_aim_element" aria-label="close form"></button>
         <h2 class="popup__title">Новое место</h2>
         <form name="element" action="#" class="popup__form" novalidate>
-          <input id="element-name" type="text" minlength="2" maxlength="30" required name="element_name" class="popup__input" pattern="^[A-Za-zА-Яа-яЁё- ]+$" placeholder="Название">
+          <input id="element-name" type="text" minlength="2" maxlength="30" required name="element_name" class="popup__input" placeholder="Название">
           <span class="element-name-error popup__input-error">error_text_placeholder</span>
           <input id="element-url" type="url" required name="element_url" class="popup__input" placeholder="Ссылка на картинку">
           <span class="element-url-error popup__input-error">error_text_placeholder</span>

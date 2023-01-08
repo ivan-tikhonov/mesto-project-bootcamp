@@ -34,6 +34,6 @@ function generateElement(item) {
 }
 
 export function addElements(items) {
-  let newElements = items.map(generateElement);
+  const newElements = items.map(generateElement);
   elementsNode.prepend(...newElements);
 }

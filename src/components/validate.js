@@ -46,8 +46,11 @@ function setEventListener(configObject, formElement) {
 };
 
 export function enableValidation(configObject) {
-  const form = configObject.formSelector;
-  setEventListener(configObject, form);
+  const formList = document.querySelectorAll(configObject.formSelector);
+  Array.from(formList).forEach((formObject) => {
+    setEventListener(configObject, formObject);
+  });
+
 };
 
 
