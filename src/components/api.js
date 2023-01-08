@@ -73,7 +73,7 @@ export function newCard(name, link) {
 }
 
 export function deleteCard(id) {
-  return fetch(`${config.baseUrl}/cards/${id} `, {
+  return fetch(`${config.baseUrl}/cards/${id}`, {
     headers: config.headers,
     method: 'DELETE'
   })
@@ -107,6 +107,21 @@ export function removeLike(id) {
       if (res.ok) {
         return res.json();
       } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
+
+export function changeAvatar(url) {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    headers: config.headers,
+    method: 'PATCH',
+    body: JSON.stringify({
+      avatar: url
+    })
+  })
+    .then(res => {
+      if (!res.ok) {
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     });
