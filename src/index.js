@@ -1,9 +1,9 @@
 import './pages/page.css';
 import { enableValidation } from "./components/validate.js";
 import { addElements} from "./components/card.js";
-import { openPopup, closePopup} from './components/utils.js';
+import { openPopup, closePopup, updateProfile} from './components/utils.js';
 import { handleProfileFormSubmit, handleElementFormSubmit} from "./components/modal.js";
-import { getInitialCards } from './components/api.js';
+import { getInitialCards, getUserInfo } from './components/api.js';
 
 const configObject = {
   formSelector: '.popup__form',
@@ -19,6 +19,7 @@ const profileOccupationInput = formProfile.querySelector('input[name="profile_oc
 
 
 const profileEditButton = document.querySelector('.profile__button-edit');
+const profileAvatarElement = document.querySelector('.profile__image')
 const profileNameElement = document.querySelector('.profile__title');
 const profileOccupationElement = document.querySelector('.profile__subtitle');
 
@@ -82,3 +83,17 @@ getInitialCards()
   .catch((err) => {
     console.log(err);
   });
+
+  getUserInfo()
+  .then((result) => {
+    updateProfile(
+        result,
+        profileAvatarElement,
+        profileNameElement,
+        profileOccupationElement
+      );
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+

@@ -8,7 +8,22 @@ const config = {
 
 export function getInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
+    headers: config.headers,
+    method: 'GET'
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
+
+export function getUserInfo() {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers,
+    method: 'GET'
   })
     .then(res => {
       if (res.ok) {
