@@ -1,5 +1,5 @@
 import { openPopup } from './utils.js'
-import { getUserInfo, deleteCard } from './api.js';
+import { getUserInfo, deleteCard, addLike, removeLike } from './api.js';
 
 const elementTemplate = document.querySelector('#element-template');
 const elementsNode = document.querySelector('.elements__container');
@@ -8,9 +8,13 @@ const popupImage = document.querySelector('.popup_aim_image');
 const popupImagePic = popupImage.querySelector('.popup__image');
 const popupImageText = popupImage.querySelector('.popup__subtitle');
 
+function likeCount(likes) {
+  return likes.reduce(function(total){
+    return total += 1;
+  },0);
+}
 
 function generateElement(item) {
-  console.log(item);
   const isMy = this.my;
   const template = elementTemplate.content;
   const newElement = template.cloneNode(true);
@@ -20,10 +24,8 @@ function generateElement(item) {
   const newElementDeleteButton = newElement.querySelector('.element__button-delete')
   const newElementLikeCount = newElement.querySelector('.element__like-count')
 
-  const likecount = item.likes.reduce(function(total){
-    return total += 1;
-  },0);
-  newElementLikeCount.textContent = likecount;
+
+  newElementLikeCount.textContent = likeCount(item.likes);
 
   getUserInfo()
     .then((result) => {
@@ -50,7 +52,26 @@ function generateElement(item) {
   newElementImage.alt = item.name;
   newElementTitle.textContent = item.name;
   newElementLikeButton.addEventListener('click', e => {
-    e.target.classList.toggle('element__button-like_active');
+    if (e.target.classList.contains('element__button-like_active')) {
+      e.target.classList.remove('element__button-like_active');
+      removeLike(item['_id'])
+        .then(res =>{
+          newElementLikeCount.textContent = likeCount(res.likes);
+        })
+        .catch(err =>{
+          console.log(err);
+        });
+    } else {
+      e.target.classList.add('element__button-like_active');
+      addLike(item['_id'])
+        .then(res =>{
+          newElementLikeCount.textContent = likeCount(res.likes);
+        })
+        .catch(err =>{
+          console.log(err);
+        });
+    }
+
   })
 
   newElementImage.addEventListener('click', e => {

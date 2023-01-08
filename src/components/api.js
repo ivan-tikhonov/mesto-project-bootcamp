@@ -55,7 +55,7 @@ export function patchUserInfo(userName, userDesc) {
 }
 
 export function newCard(name, link) {
-  return fetch(`${config.baseUrl}/cards `, {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
@@ -79,6 +79,34 @@ export function deleteCard(id) {
   })
     .then(res => {
       if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
+
+export function addLike(id) {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: 'PUT',
+    headers: config.headers,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    });
+}
+
+export function removeLike(id) {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: 'DELETE',
+    headers: config.headers,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
         return Promise.reject(`Ошибка: ${res.status}`);
       }
     });
