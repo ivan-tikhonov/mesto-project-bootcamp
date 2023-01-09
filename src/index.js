@@ -1,17 +1,12 @@
 import './pages/page.css';
+import { configObject } from './components/constants.js';
 import { enableValidation } from "./components/validate.js";
 import { addElements} from "./components/card.js";
 import { openPopup, closePopup} from './components/utils.js';
 import { handleProfileFormSubmit, handleElementFormSubmit, handleAvatarFormSubmit, updateProfile, profileNameElement, profileOccupationElement} from "./components/modal.js";
 import { getInitialCards, getUserInfo } from './components/api.js';
 
-const configObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inputErrorClass: 'popup__input_state_invalid',
-  errorClass: 'popup__input-error_active'
-}
+
 
 const formProfile = document.forms.profile;
 const profileNameInput = formProfile.querySelector('input[name="profile_name"]');
@@ -88,19 +83,11 @@ cardForm.addEventListener('submit', evt => {
 enableValidation(configObject);
 
 
-getUserInfo()
-  .then((result) => {
-    updateProfile(result);
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([userData, cards]) => {
+    updateProfile(userData);
+    addElements(cards, userData);
   })
   .catch((err) => {
     console.log(err);
   });
-
-getInitialCards()
-  .then((result) => {
-    addElements(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-

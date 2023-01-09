@@ -1,6 +1,6 @@
 import { hideClosestPopup } from './utils.js'
 import { addElements } from './card.js';
-import { newCard, patchUserInfo, changeAvatar } from './api.js';
+import { createNewCard, patchUserInfo, changeAvatar } from './api.js';
 
 const profileAvatarElement = document.querySelector('.profile__image')
 export const profileNameElement = document.querySelector('.profile__title');
@@ -22,7 +22,7 @@ function renderLoading(isLoading, element) {
 
 export function handleProfileFormSubmit(evt, profileNameInput, profileOccupationInput) {
   evt.preventDefault();
-  const submitButton = evt.target.querySelector('.popup__button-save');
+  const submitButton = evt.submitter;
   renderLoading(true, submitButton);
   const nameValue = profileNameInput.value;
   const occupationValue = profileOccupationInput.value;
@@ -30,6 +30,7 @@ export function handleProfileFormSubmit(evt, profileNameInput, profileOccupation
   patchUserInfo(nameValue, occupationValue)
    .then(res =>{
       updateProfile(res);
+      hideClosestPopup(evt);
    })
    .catch(err => {
     console.log(err);
@@ -37,16 +38,18 @@ export function handleProfileFormSubmit(evt, profileNameInput, profileOccupation
    .finally(() => {
     renderLoading(false, submitButton);
    });
-  hideClosestPopup(evt);
+
 }
 
 export function handleElementFormSubmit(evt, elementNameInput, elementURLInput) {
   evt.preventDefault();
   const submitButton = evt.target.querySelector('.popup__button-save');
   renderLoading(true, submitButton);
-  newCard(elementNameInput.value, elementURLInput.value)
+  createNewCard(elementNameInput.value, elementURLInput.value)
     .then(res => {
       addElements([res]);
+      evt.target.reset()
+      hideClosestPopup(evt);
     })
     .catch(err =>{
       console.log(err);
@@ -54,7 +57,6 @@ export function handleElementFormSubmit(evt, elementNameInput, elementURLInput) 
     .finally(() => {
       renderLoading(false, submitButton);
      });
-  hideClosestPopup(evt);
 }
 
 export function handleAvatarFormSubmit(evt, avatarURLInput) {
@@ -64,6 +66,8 @@ export function handleAvatarFormSubmit(evt, avatarURLInput) {
   changeAvatar(avatarURLInput.value)
     .then(res => {
       profileAvatarElement.src = avatarURLInput.value;
+      evt.target.reset()
+      hideClosestPopup(evt);
     })
     .catch(err =>{
       console.log(err);
@@ -71,6 +75,5 @@ export function handleAvatarFormSubmit(evt, avatarURLInput) {
     .finally(() => {
       renderLoading(false, submitButton);
      });
-  hideClosestPopup(evt);
 }
 
