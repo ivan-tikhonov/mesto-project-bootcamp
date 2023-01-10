@@ -48,6 +48,15 @@ popups.forEach((popup) => {
 });
 
 
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    updateProfile(userData);
+    addElements(cards, userId);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 
 
@@ -76,18 +85,10 @@ avatarForm.addEventListener('submit', evt =>{
   handleAvatarFormSubmit(evt, avatarURLInput);
 });
 cardForm.addEventListener('submit', evt => {
-  handleElementFormSubmit(evt, elementNameInput, elementURLInput);
+  handleElementFormSubmit(evt, elementNameInput, elementURLInput, userId);
 });
 
 
 enableValidation(configObject);
 
 
-Promise.all([getUserInfo(), getInitialCards()])
-  .then(([userData, cards]) => {
-    updateProfile(userData);
-    addElements(cards, userData);
-  })
-  .catch((err) => {
-    console.log(err);
-  });

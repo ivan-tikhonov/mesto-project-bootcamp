@@ -41,13 +41,13 @@ export function handleProfileFormSubmit(evt, profileNameInput, profileOccupation
 
 }
 
-export function handleElementFormSubmit(evt, elementNameInput, elementURLInput) {
+export function handleElementFormSubmit(evt, elementNameInput, elementURLInput, userId) {
   evt.preventDefault();
   const submitButton = evt.target.querySelector('.popup__button-save');
   renderLoading(true, submitButton);
   createNewCard(elementNameInput.value, elementURLInput.value)
     .then(res => {
-      addElements([res]);
+      addElements([res], userId);
       evt.target.reset()
       hideClosestPopup(evt);
     })

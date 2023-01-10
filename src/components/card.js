@@ -8,6 +8,8 @@ const popupImage = document.querySelector('.popup_aim_image');
 const popupImagePic = popupImage.querySelector('.popup__image');
 const popupImageText = popupImage.querySelector('.popup__subtitle');
 
+let profileUserId
+
 function countLikes(likes) {
   return likes.length;
 }
@@ -22,7 +24,7 @@ function generateElement(item) {
   const newElementLikeCount = newElement.querySelector('.element__like-count')
   newElementLikeCount.textContent = countLikes(item.likes);
 
-  if (item.owner['_id'] === this['_id']) {
+  if (item.owner['_id'] === profileUserId) {
     newElementDeleteButton.addEventListener('click', (event) =>{
       deleteCard(item['_id'])
         .then(res => {
@@ -42,7 +44,7 @@ function generateElement(item) {
   newElementImage.alt = item.name;
   newElementTitle.textContent = item.name;
 
-  if (item.likes.some((like) => like['_id'] === this['_id'])) {
+  if (item.likes.some((like) => like['_id'] === profileUserId)) {
     newElementLikeButton.classList.add('element__button-like_active');
   }
 
@@ -79,7 +81,8 @@ function generateElement(item) {
 
 }
 
-export function addElements(items, userData) {
-  const newElements = items.map(generateElement, userData);
+export function addElements(items, userId) {
+  profileUserId = userId;
+  const newElements = items.map(generateElement);
   elementsNode.prepend(...newElements);
 }
